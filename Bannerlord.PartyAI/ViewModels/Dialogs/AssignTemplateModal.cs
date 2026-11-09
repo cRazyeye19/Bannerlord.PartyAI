@@ -15,7 +15,7 @@ internal static class AssignTemplateModal
 
         Modal.ShowMultiSelection(
             title: title,
-            affirmativeText: GameTexts.FindText("str_confirm"),
+            affirmativeText: new TextObject("{=5Unqsx3N}Confirm"),
             inquiryElements: elements,
             affirmativeAction: list =>
             {

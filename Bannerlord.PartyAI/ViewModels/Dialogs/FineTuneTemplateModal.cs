@@ -18,7 +18,7 @@ internal static class FineTuneTemplateModal
 
         Modal.ShowMultiSelection(
             title: title,
-            affirmativeText: GameTexts.FindText("str_confirm"),
+            affirmativeText: new TextObject("{=5Unqsx3N}Confirm"),
             negativeText: GameTexts.FindText("str_cancel"),
             inquiryElements: elements,
             affirmativeAction: list => ConfirmTemplateSelection(list));
