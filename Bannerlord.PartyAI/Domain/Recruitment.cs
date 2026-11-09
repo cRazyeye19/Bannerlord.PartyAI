@@ -163,13 +163,13 @@ public static class Recruitment
     {
         TroopRoster results = TroopRoster.CreateDummyTroopRoster();
         List<CharacterObject> characters = new();
-        Occupation[] occupations = [Occupation.Soldier, Occupation.Mercenary, Occupation.CaravanGuard];
+        Occupation[] occupations = [Occupation.Soldier, Occupation.Mercenary, Occupation.CaravanGuard, Occupation.Bandit];
         List<CharacterObject> exclude = new();
 
         foreach (CharacterObject troop in CharacterObject.All)
         {
             if (!characters.Contains(troop) && !troop.IsHero && troop.Culture != null
-                && !troop.Culture.IsBandit && occupations.Contains(troop.Occupation))
+                && occupations.Contains(troop.Occupation))
             {
                 characters.AppendList(TraverseTree(troop).Where(co => co.UpgradeTargets?.Length == 0).ToList());
             }
