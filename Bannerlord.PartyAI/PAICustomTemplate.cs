@@ -43,7 +43,7 @@ public class PAICustomTemplate
         {
             foreach (CharacterObject troop in CharacterObject.All)
             {
-                if (!troop.IsHero && (!troop.Culture?.IsBandit ?? false) && UpgradesTo(troop, e.Character))
+                if (!troop.IsHero && UpgradesTo(troop, e.Character))
                 {
                     result.Add(troop);
                 }
