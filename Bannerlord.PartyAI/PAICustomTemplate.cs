@@ -12,6 +12,13 @@ public class PAICustomTemplate
     [SaveableProperty(2)] public TroopRoster UpgradeTargets { get; private set; }
     [SaveableProperty(3)] public List<CharacterObject> Troops { get; internal set; }
     private HashSet<CultureObject> _troopCultures = new();
+
+    /// <summary>
+    /// Cultures of the faction troops in this template. Bandit cultures are ignored: no
+    /// settlement has a bandit culture, so counting them would make every settlement look
+    /// ineligible. A bandit-only template therefore has an empty set, which callers treat as
+    /// "any settlement".
+    /// </summary>
     public HashSet<CultureObject> TroopCultures
     {
         get
@@ -21,12 +28,21 @@ public class PAICustomTemplate
             {
                 foreach (CharacterObject troop in Troops)
                 {
+                    if (IsBanditTroop(troop))
+                    {
+                        continue;
+                    }
+
                     _troopCultures.Add(troop.Culture);
                 }
             }
             return _troopCultures;
         }
     }
+
+    public bool ContainsBanditTroops => Troops.Any(IsBanditTroop);
+
+    private static bool IsBanditTroop(CharacterObject troop) => troop.Culture?.IsBandit ?? false;
 
     public PAICustomTemplate(string name, TroopRoster upgradeTargets)
     {
