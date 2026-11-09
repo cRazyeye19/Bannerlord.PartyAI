@@ -185,7 +185,7 @@ with
 - [ ] **Step 2: Verify**
 
 Run: `grep -n "IsBanditTroop\|ContainsBanditTroops" Bannerlord.PartyAI/PAICustomTemplate.cs`
-Expected: four lines: the `continue` check in the getter, the `ContainsBanditTroops` property, and the `IsBanditTroop` definition plus the `Any(IsBanditTroop)` use (the definition and the property each match once, the getter once, so at least three distinct lines containing `IsBanditTroop` and one containing `ContainsBanditTroops`).
+Expected: exactly three lines: `if (IsBanditTroop(troop))` in the getter, `public bool ContainsBanditTroops => Troops.Any(IsBanditTroop);`, and the `private static bool IsBanditTroop(...)` definition.
 
 - [ ] **Step 3: Commit**
 
