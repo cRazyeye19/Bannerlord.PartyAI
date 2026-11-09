@@ -172,6 +172,13 @@ public static class Recruitment
                 && occupations.Contains(troop.Occupation))
             {
                 characters.AppendList(TraverseTree(troop).Where(co => co.UpgradeTargets?.Length == 0).ToList());
+
+                // Bandit trees upgrade into faction troops, so their own tiers are never leaves.
+                // List every bandit troop so each tier can be picked as a template target.
+                if (troop.Culture.IsBandit)
+                {
+                    characters.Add(troop);
+                }
             }
         }
 

@@ -57,8 +57,16 @@ public class PAICustomTemplate
         List<CharacterObject> result = new();
         foreach (TroopRosterElement e in UpgradeTargets.GetTroopRoster())
         {
+            // Bandit trees upgrade into faction troops (e.g. Sea Raider -> Druzhinnik). Only pull bandit
+            // troops in when the chosen target is itself a bandit troop, so faction templates stay faction-only.
+            bool targetIsBandit = IsBanditTroop(e.Character);
             foreach (CharacterObject troop in CharacterObject.All)
             {
+                if (!targetIsBandit && IsBanditTroop(troop))
+                {
+                    continue;
+                }
+
                 if (!troop.IsHero && UpgradesTo(troop, e.Character))
                 {
                     result.Add(troop);
