@@ -237,5 +237,7 @@
   <string id="PAhQoukaUbN"                        text="May Take Troops From Settlements"/>
   <string id="PAID8JkoxK0"                        text="Daily Budget"/>
   <string id="PAIAreaPatrolHint"                  text="Patrol an area around the target settlement." />
+  <string id="PAIBanditTemplateTitle"             text="Bandit Troops"/>
+  <string id="PAIBanditTemplateWarning"           text="This template contains bandit troops. Bandit troops are only obtained through troop conversion, which is currently disabled, so parties using this template won't recruit them. Enable troop conversion in the mod options."/>
 </strings>
 </base>

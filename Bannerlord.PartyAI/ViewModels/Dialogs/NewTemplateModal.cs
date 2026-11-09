@@ -2,6 +2,7 @@
 using Bannerlord.PartyAI.ViewModels.Misc;
 using System;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace Bannerlord.PartyAI.ViewModels.Dialogs;
@@ -71,7 +72,21 @@ internal static class NewTemplateModal
 
                 SubModule.PartySettingsManager.AddPartyTemplate(newTemplate);
 
+                if (newTemplate.ContainsBanditTroops && !SubModule.PartySettingsManager.AllowTroopConversion)
+                {
+                    ShowBanditConversionWarning();
+                }
+
                 return true;
             });
+    }
+
+    private static void ShowBanditConversionWarning()
+    {
+        InformationManager.ShowInquiry(new InquiryData(
+            new TextObject("{=PAIBanditTemplateTitle}Bandit Troops").ToString(),
+            new TextObject("{=PAIBanditTemplateWarning}This template contains bandit troops. Bandit troops are only obtained through troop conversion, which is currently disabled, so parties using this template won't recruit them. Enable troop conversion in the mod options.").ToString(),
+            true, false, new TextObject("{=Y94H6XnK}Accept").ToString(), string.Empty,
+            () => { }, null));
     }
 }
